@@ -8,17 +8,17 @@
    <children>
       <AnchorPane layoutX="14.0" layoutY="91.0" prefHeight="136.0" prefWidth="291.0">
          <children>
-            <RadioButton fx:id="cButton" layoutX="14.0" layoutY="46.0" mnemonicParsing="false" text="Close Account">
+            <RadioButton fx:id="cButton" layoutX="14.0" layoutY="46.0" mnemonicParsing="false" onAction="#getCommand" text="Close Account">
                <toggleGroup>
                   <ToggleGroup fx:id="Command" />
                </toggleGroup></RadioButton>
-            <RadioButton fx:id="dButton" layoutX="14.0" layoutY="76.0" mnemonicParsing="false" text="Deposit" toggleGroup="$Command" />
-            <RadioButton fx:id="ubButton" layoutX="125.0" layoutY="101.0" mnemonicParsing="false" text="Update balances" toggleGroup="$Command" />
-            <RadioButton fx:id="piButton" layoutX="125.0" layoutY="76.0" mnemonicParsing="false" text="Display with fees/interest" toggleGroup="$Command" />
-            <RadioButton fx:id="ptButton" layoutX="124.0" layoutY="46.0" mnemonicParsing="false" text="Display by type" toggleGroup="$Command" />
-            <RadioButton fx:id="pButton" layoutX="124.0" layoutY="14.0" mnemonicParsing="false" text="Display accounts" toggleGroup="$Command" />
+            <RadioButton fx:id="dButton" layoutX="14.0" layoutY="76.0" mnemonicParsing="false" onAction="#getCommand" text="Deposit" toggleGroup="$Command" />
+            <RadioButton fx:id="ubButton" layoutX="125.0" layoutY="101.0" mnemonicParsing="false" onAction="#getCommand" text="Update balances" toggleGroup="$Command" />
+            <RadioButton fx:id="piButton" layoutX="125.0" layoutY="76.0" mnemonicParsing="false" onAction="#getCommand" text="Display with fees/interest" toggleGroup="$Command" />
+            <RadioButton fx:id="ptButton" layoutX="124.0" layoutY="46.0" mnemonicParsing="false" onAction="#getCommand" text="Display by type" toggleGroup="$Command" />
+            <RadioButton fx:id="pButton" layoutX="124.0" layoutY="14.0" mnemonicParsing="false" onAction="#getCommand" text="Display accounts" toggleGroup="$Command" />
             <RadioButton fx:id="oButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#getCommand" prefWidth="110.0" text="Open Account" toggleGroup="$Command" />
-            <RadioButton fx:id="wButton" layoutX="14.0" layoutY="101.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="97.0" text="Withdraw" toggleGroup="$Command" />
+            <RadioButton fx:id="wButton" layoutX="14.0" layoutY="101.0" mnemonicParsing="false" onAction="#getCommand" prefHeight="17.0" prefWidth="97.0" text="Withdraw" toggleGroup="$Command" />
          </children>
       </AnchorPane>
       <TextArea fx:id="myTextArea" editable="false" layoutX="14.0" layoutY="14.0" prefHeight="61.0" prefWidth="842.0" text="Welcome! What would you like to do?">
@@ -26,17 +26,17 @@
             <Font size="20.0" />
          </font>
       </TextArea>
-      <VBox layoutX="14.0" layoutY="227.0" prefHeight="80.0" prefWidth="161.0">
+      <VBox fx:id="userBox" layoutX="14.0" layoutY="227.0" prefHeight="80.0" prefWidth="161.0">
          <children>
-            <TextArea prefHeight="56.0" prefWidth="161.0" text="Enter user info here" />
+            <TextArea fx:id="userArea" prefHeight="56.0" prefWidth="161.0" text="Enter user info here" />
             <TextField promptText="first name" />
             <TextField promptText="last name" />
             <DatePicker promptText="enter dob" />
          </children>
       </VBox>
-      <Pane layoutX="14.0" layoutY="348.0" prefHeight="200.0" prefWidth="200.0">
+      <Pane fx:id="accountBox" layoutX="14.0" layoutY="348.0" prefHeight="200.0" prefWidth="200.0">
          <children>
-            <TextArea layoutX="16.0" prefHeight="38.0" prefWidth="169.0" text="Enter account info here" />
+            <TextArea fx:id="accountArea" layoutX="16.0" prefHeight="38.0" prefWidth="169.0" text="Enter account info here" />
             <TextField layoutX="16.0" layoutY="38.0" prefHeight="25.0" prefWidth="169.0" promptText="deposit/withdrawal amount" />
             <RadioButton layoutY="70.0" mnemonicParsing="false" text="Checking">
                <toggleGroup>
