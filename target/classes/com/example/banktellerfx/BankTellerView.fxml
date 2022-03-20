@@ -1,27 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" fillWidth="false" prefHeight="465.0" prefWidth="649.0" spacing="20.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.banktellerfx.BankTellerController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-    </padding>
-   <Label fx:id="myLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="111.0" prefWidth="543.0" text="Welcome to Sarn Banking!">
-      <font>
-         <Font size="25.0" />
-      </font>
-   </Label>
-   <Label alignment="CENTER" prefHeight="76.0" prefWidth="219.0" text="What would you like to do?">
-      <font>
-         <Font size="15.0" />
-      </font>
-   </Label>
-   <ChoiceBox fx:id="myChoiceBox" prefHeight="25.0" prefWidth="65.0" />
-   <cursor>
-      <Cursor fx:constant="HAND" />
-   </cursor>
-</VBox>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="676.0" prefWidth="891.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.banktellerfx.BankTellerController">
+   <children>
+      <AnchorPane layoutX="14.0" layoutY="91.0" prefHeight="136.0" prefWidth="291.0">
+         <children>
+            <RadioButton fx:id="cButton" layoutX="14.0" layoutY="46.0" mnemonicParsing="false" text="Close Account">
+               <toggleGroup>
+                  <ToggleGroup fx:id="Command" />
+               </toggleGroup></RadioButton>
+            <RadioButton fx:id="dButton" layoutX="14.0" layoutY="76.0" mnemonicParsing="false" text="Deposit" toggleGroup="$Command" />
+            <RadioButton fx:id="ubButton" layoutX="125.0" layoutY="101.0" mnemonicParsing="false" text="Update balances" toggleGroup="$Command" />
+            <RadioButton fx:id="piButton" layoutX="125.0" layoutY="76.0" mnemonicParsing="false" text="Display with fees/interest" toggleGroup="$Command" />
+            <RadioButton fx:id="ptButton" layoutX="124.0" layoutY="46.0" mnemonicParsing="false" text="Display by type" toggleGroup="$Command" />
+            <RadioButton fx:id="pButton" layoutX="124.0" layoutY="14.0" mnemonicParsing="false" text="Display accounts" toggleGroup="$Command" />
+            <RadioButton fx:id="oButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#getCommand" prefWidth="110.0" text="Open Account" toggleGroup="$Command" />
+            <RadioButton fx:id="wButton" layoutX="14.0" layoutY="101.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="97.0" text="Withdraw" toggleGroup="$Command" />
+         </children>
+      </AnchorPane>
+      <TextArea fx:id="myTextArea" editable="false" layoutX="14.0" layoutY="14.0" prefHeight="61.0" prefWidth="842.0" text="Welcome! What would you like to do?">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextArea>
+      <VBox layoutX="14.0" layoutY="263.0" prefHeight="80.0" prefWidth="161.0">
+         <children>
+            <TextField promptText="first name" />
+            <TextField promptText="last name" />
+            <DatePicker promptText="enter dob" />
+         </children>
+      </VBox>
+      <TextArea layoutX="14.0" layoutY="219.0" prefHeight="29.0" prefWidth="161.0" text="Enter user info here" />
+      <DialogPane layoutX="323.0" layoutY="227.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="480.0">
+          <header>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0" />
+          </header>
+          <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0" />
+          </content>
+          <expandableContent>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0" />
+          </expandableContent>
+      </DialogPane>
+   </children>
+</AnchorPane>
