@@ -148,20 +148,23 @@ public class AccountDatabase {
     }
 
     /**
-     * print all the accounts in the database.
+     * display all the accounts in the database.
      */
-    public void print() {
+    public StringBuilder print() {
+        StringBuilder accDisplay = new StringBuilder();
         if(numAcct == 0) {
-            System.out.println("Account Database is empty!");
-            return;
+            accDisplay.append("Account Database is empty!");
+            return accDisplay;
         }
-        System.out.println('\n');
-        System.out.println("*list of accounts in the database*");
+        accDisplay.append("*list of accounts in the database*");
+        accDisplay.append('\n');
         for (int i = 0; i < numAcct; i++){
-            System.out.println(accounts[i].toString());
+            accDisplay.append(accounts[i].toString());
+            accDisplay.append('\n');
         }
-        System.out.println("*end of list*");
-        System.out.println('\n');
+        accDisplay.append("*end of list*");
+        accDisplay.append('\n');
+        return accDisplay;
     }
 
     /**
