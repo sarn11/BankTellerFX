@@ -51,7 +51,7 @@
             <RadioButton fx:id="sButton" layoutX="14.0" layoutY="41.0" mnemonicParsing="false" onAction="#getAccType" text="Savings" toggleGroup="$AccountType" />
          </children>
       </Pane>
-      <TextArea fx:id="displayScreen" editable="false" layoutX="305.0" layoutY="90.0" prefHeight="371.0" prefWidth="721.0" promptText="Accounts will be displayed here." />
+      <TextArea fx:id="displayScreen" editable="false" layoutX="305.0" layoutY="90.0" prefHeight="555.0" prefWidth="721.0" promptText="Accounts will be displayed here." />
       <HBox fx:id="commandPane" layoutX="11.0" layoutY="82.0" prefHeight="143.0" prefWidth="294.0">
          <children>
             <AnchorPane prefHeight="136.0" prefWidth="291.0">
