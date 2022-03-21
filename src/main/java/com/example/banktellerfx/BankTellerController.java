@@ -219,6 +219,7 @@ public class BankTellerController {
         ccButton.setSelected(false);
         sButton.setSelected(false);
         mmButton.setSelected(false);
+        myTextArea.setText("What would you like to do?");
     }
 
     private void openAcc(Account acc) {
