@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="676.0" prefWidth="891.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.banktellerfx.BankTellerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="676.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.banktellerfx.BankTellerController">
    <children>
-      <TextArea fx:id="myTextArea" editable="false" layoutX="14.0" layoutY="14.0" prefHeight="61.0" prefWidth="842.0" text="Welcome! What would you like to do?">
+      <TextArea fx:id="myTextArea" editable="false" layoutX="14.0" layoutY="14.0" prefHeight="61.0" prefWidth="1012.0" text="Welcome! What would you like to do?">
          <font>
             <Font size="20.0" />
          </font>
@@ -51,7 +51,7 @@
             <RadioButton fx:id="sButton" layoutX="14.0" layoutY="41.0" mnemonicParsing="false" onAction="#getAccType" text="Savings" toggleGroup="$AccountType" />
          </children>
       </Pane>
-      <TextArea fx:id="displayScreen" editable="false" layoutX="305.0" layoutY="90.0" prefHeight="371.0" prefWidth="567.0" promptText="Accounts will be displayed here." />
+      <TextArea fx:id="displayScreen" editable="false" layoutX="305.0" layoutY="90.0" prefHeight="555.0" prefWidth="721.0" promptText="Accounts will be displayed here." />
       <HBox fx:id="commandPane" layoutX="11.0" layoutY="82.0" prefHeight="143.0" prefWidth="294.0">
          <children>
             <AnchorPane prefHeight="136.0" prefWidth="291.0">
@@ -72,5 +72,6 @@
             </AnchorPane>
          </children>
       </HBox>
+      <Button layoutX="55.0" layoutY="590.0" mnemonicParsing="false" onAction="#resetData" prefHeight="25.0" prefWidth="174.0" text="Reset Input!" />
    </children>
 </AnchorPane>

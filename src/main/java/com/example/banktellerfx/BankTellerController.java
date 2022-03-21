@@ -1,6 +1,5 @@
 package com.example.banktellerfx;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -81,13 +80,11 @@ public class BankTellerController {
         if (ccButton.isSelected()) {
             if (oButton.isSelected()) loyalty_campus.setDisable(false);
         }
-//        else if (checkButton.isSelected()) {
-//        }
+        else if (checkButton.isSelected()) loyalty_campus.setDisable(true);
         else if (sButton.isSelected()) {
             if (oButton.isSelected()) loyalty_campus.setDisable(false);
         }
-//        else if (mmButton.isSelected()) {
-//        }
+        else if (mmButton.isSelected()) loyalty_campus.setDisable(true);
         accountBox.setDisable(true);
         accountBox2.setDisable(false);
     }
@@ -128,7 +125,7 @@ public class BankTellerController {
             accountArea.setText("Enter an amount greater than 0!");
             return;
         }
-        if (ccButton.isSelected() && (code > 3 || code < 0)) {
+        if (ccButton.isSelected() && (code > 2 || code < 0)) {
             accountArea.setText("Invalid campus code!");
             return;
         }
@@ -203,7 +200,7 @@ public class BankTellerController {
         }
     }
 
-    private void resetData() {
+    public void resetData() {
         commandPane.setDisable(false);
         accountBox.setDisable(true);
         accountBox2.setDisable(true);
@@ -214,6 +211,14 @@ public class BankTellerController {
         accountArea.setText("Enter account info here:");
         moneyField.clear();
         loyalty_campus.clear();
+        oButton.setSelected(false);
+        cButton.setSelected(false);
+        dButton.setSelected(false);
+        wButton.setSelected(false);
+        checkButton.setSelected(false);
+        ccButton.setSelected(false);
+        sButton.setSelected(false);
+        mmButton.setSelected(false);
     }
 
     private void openAcc(Account acc) {
