@@ -57,7 +57,7 @@ public class MoneyMarket extends Savings{
      */
     public double fee() {
         if (this.closed) return 0; //closed account
-        if (this.balance < 2500) return 10.0;
+        else if (this.balance < 2500) return 10.0;
         else if (this.withdrawals > 3) return 10.0;
         else return 0;
     }

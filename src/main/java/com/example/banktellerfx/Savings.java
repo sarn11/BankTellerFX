@@ -61,6 +61,7 @@ public class Savings extends Account {
     public double monthlyInterest() {
 
         if (this.closed) return 0; //closed account
+        if (this.balance < 0) return 0;
         if (loyal == 0) return this.balance * (.003/12);
         return (this.balance * (.0045/12));
     }
@@ -71,8 +72,7 @@ public class Savings extends Account {
      */
     public double fee() {
         if (this.closed) return 0; //closed account
-        if (this.balance < 0) return 0;
-        if (this.balance < 300) return 6.0;
+        else if (this.balance < 300) return 6.0;
         else return 0;
     }
 

@@ -37,6 +37,7 @@ public class BankTellerController {
         }
         else if (cButton.isSelected()) {
             myTextArea.setText("Enter info below to close your account.");
+            moneyField.setDisable(true);
         }
         else if (dButton.isSelected()) {
             myTextArea.setText("Enter info below to make a deposit.");
@@ -44,6 +45,8 @@ public class BankTellerController {
         else if (wButton.isSelected()) {
             myTextArea.setText("Enter info below to make a withdrawal.");
         }
+        if (!oButton.isSelected()) loyalty_campus.setDisable(true);
+        if (!cButton.isSelected()) moneyField.setDisable(false);
     }
 
     public void userInfo() {
@@ -76,34 +79,38 @@ public class BankTellerController {
 
     public void getAccType() {
         if (ccButton.isSelected()) {
-            loyalty_campus.setDisable(false);
+            if (oButton.isSelected()) loyalty_campus.setDisable(false);
         }
-        else if (checkButton.isSelected()) {
-        }
+//        else if (checkButton.isSelected()) {
+//        }
         else if (sButton.isSelected()) {
-            loyalty_campus.setDisable(false);
+            if (oButton.isSelected()) loyalty_campus.setDisable(false);
         }
-        else if (mmButton.isSelected()) {
-        }
+//        else if (mmButton.isSelected()) {
+//        }
         accountBox.setDisable(true);
         accountBox2.setDisable(false);
     }
 
     public void accountInfo() {
-
+        if (cButton.isSelected()) {
+            createAcc(0.0,0);
+            resetData();
+            return;
+        }
         if (moneyField.getText().trim().isEmpty()) {
             accountArea.setText("Enter a valid amount!");
             return;
         }
-        if ((sButton.isSelected() || ccButton.isSelected()) && loyalty_campus.getText().isEmpty()) {
+        if ((sButton.isSelected() || ccButton.isSelected()) && loyalty_campus.getText().isEmpty() && oButton.isSelected()) {
             accountArea.setText("Enter a loyalty/campus code!");
             return;
         }
         double money;
-        int code = -1;
+        int code = 0;
         try {
             money = Double.parseDouble(moneyField.getText());
-            if (sButton.isSelected() || ccButton.isSelected()) {
+            if ((sButton.isSelected() || ccButton.isSelected()) && oButton.isSelected()) {
                 code = Integer.parseInt(loyalty_campus.getText());
             }
         }
@@ -117,7 +124,7 @@ public class BankTellerController {
             return;
         }
 
-        if (money <= 0) {
+        if (money <= 0 && !cButton.isSelected()) {
             accountArea.setText("Enter an amount greater than 0!");
             return;
         }
@@ -131,7 +138,6 @@ public class BankTellerController {
         }
         createAcc(money, code);
         resetData();
-        //accountArea.setText("Success!");
     }
 
     public void createAcc(Double money, int code) {
@@ -147,7 +153,6 @@ public class BankTellerController {
         else if (sButton.isSelected()) {
             acc = new Savings(prof, money, code);
             sButton.setSelected(false);
-
         }
         else if (mmButton.isSelected()) {
             acc = new MoneyMarket(prof, money);
@@ -156,6 +161,45 @@ public class BankTellerController {
         if (acc != null && oButton.isSelected()) {
             openAcc(acc);
             oButton.setSelected(false);
+        }
+        else if (acc != null && cButton.isSelected()) {
+            closeAcc(acc);
+            cButton.setSelected(false);
+        }
+        else if (acc != null && dButton.isSelected()) {
+            depositAcc(acc);
+            dButton.setSelected(false);
+        }
+        else if (acc != null && wButton.isSelected()) {
+            withdrawAcc(acc);
+            wButton.setSelected(false);
+        }
+    }
+
+    private void withdrawAcc(Account acc) {
+        boolean b = db.withdraw(acc);
+        switch (isReopen(acc)) {
+            case "Duplicate" -> {
+                if (!b) {
+                    myTextArea.setText("Withdrawal - insufficient funds.");
+                }
+                else myTextArea.setText("Withdrawal - balance updated.");
+            }
+            case "Reopen" -> myTextArea.setText("Cannot withdraw from a closed account.");
+            case "Different checking types", "No duplicate" -> myTextArea.setText(prof.toString() + " " + acc.getType()
+                    + " is not in the database.");
+        }
+    }
+
+    private void depositAcc(Account acc) {
+        switch (isReopen(acc)) {
+            case "Duplicate" -> {
+                db.deposit(acc);
+                myTextArea.setText("Deposit - balance updated.");
+            }
+            case "Reopen" -> myTextArea.setText("Cannot deposit into a closed account.");
+            case "Different checking types", "No duplicate" -> myTextArea.setText(prof.toString() + " " + acc.getType()
+                    + " is not in the database.");
         }
     }
 
@@ -171,21 +215,31 @@ public class BankTellerController {
         moneyField.clear();
         loyalty_campus.clear();
     }
+
     private void openAcc(Account acc) {
         switch (isReopen(acc)) {
-            case "No duplicate":
+            case "No duplicate" -> {
                 db.open(acc);
                 myTextArea.setText("Account opened!");
-                break;
-            case "Reopen":
+            }
+            case "Reopen" -> {
                 db.open(acc);
                 myTextArea.setText("Account reopened!");
-            case "Different checking types":
-                myTextArea.setText(prof.toString() + " already has a checking account.");
-                break;
-            case "Duplicate":
-                myTextArea.setText(prof.toString() + " already has a " + acc.getType() + " account!");
-                break;
+            }
+            case "Different checking types" -> myTextArea.setText(prof.toString() + " already has a checking account.");
+            case "Duplicate" -> myTextArea.setText(prof.toString() + " already has a " + acc.getType() + " account!");
+        }
+    }
+
+    private void closeAcc(Account acc) {
+        switch (isReopen(acc)) {
+            case "No duplicate", "Different checking types" -> myTextArea.setText(prof.toString() + " "
+                    + acc.getType() + " is not in the database!");
+            case "Reopen" -> myTextArea.setText("Account is already closed!");
+            case "Duplicate" -> {
+                myTextArea.setText("Account closed!");
+                db.close(acc);
+            }
         }
     }
 
@@ -202,12 +256,24 @@ public class BankTellerController {
         }
         return "No duplicate";
     }
-    // -2 if accounts are EQUAL and its closed -reopen if called/can't deposit/can't withdraw.
-    // -3 if accounts are both checking type, but not same variation.
-    // -4 if accounts are EQUAL, and it is not closed.
 
     public void displayAccounts() {
         StringBuilder accDisplay = db.print();
+        displayScreen.setText(String.valueOf(accDisplay));
+    }
+
+    public void displayByType() {
+        StringBuilder accDisplay = db.printByAccountType();
+        displayScreen.setText(String.valueOf(accDisplay));
+    }
+
+    public void updateBalances() {
+        StringBuilder accDisplay = db.printUpdatedBalances();
+        displayScreen.setText(String.valueOf(accDisplay));
+    }
+
+    public void displayFees() {
+        StringBuilder accDisplay = db.printFeeAndInterest();
         displayScreen.setText(String.valueOf(accDisplay));
     }
 

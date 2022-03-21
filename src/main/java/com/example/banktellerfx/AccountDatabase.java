@@ -141,7 +141,7 @@ public class AccountDatabase {
         }
 
         if (account.balance > accounts[index].balance) return false;
-
+        if (!account.getType().equals(accounts[index].getType())) return false;
         accounts[index].withdraw(account.balance);
 
         return true;
@@ -184,31 +184,33 @@ public class AccountDatabase {
     }
 
     /**
-     * print all the accounts in the database organized by the type.
+     * display all the accounts in the database organized by the type.
      */
-    public void printByAccountType() {
+    public StringBuilder printByAccountType() {
+        StringBuilder accDisplay = new StringBuilder();
         if(numAcct == 0) {
-            System.out.println("Account Database is empty!");
-            return;
+            accDisplay.append("Account Database is empty!");
+            return accDisplay;
         }
-        System.out.println('\n' + "*list of accounts by account type*");
-
+        accDisplay.append("*list of accounts by account type*\n");
         sortDatabase();
         for (int i = 0; i < numAcct; i++){
-            System.out.println(accounts[i].toString());
+            accDisplay.append(accounts[i].toString() + '\n');
         }
-        System.out.println("*end of list*" + '\n');
+        accDisplay.append("*end of list*" + '\n');
+        return accDisplay;
     }
 
     /**
-     * prints all accounts along with their fees and monthly interest.
+     * displays all accounts along with their fees and monthly interest.
      */
-    public void printFeeAndInterest() {
+    public StringBuilder printFeeAndInterest() {
+        StringBuilder accDisplay = new StringBuilder();
         if(numAcct == 0) {
-            System.out.println("Account Database is empty!");
-            return;
+           accDisplay.append("Account Database is empty!");
+           return accDisplay;
         }
-        System.out.println('\n' + "*list of accounts with fees and monthly interest*");
+        accDisplay.append("*list of accounts with fees and monthly interest*" + '\n');
         DecimalFormat fmt = new DecimalFormat("###,##0.00");
         String fee;
         String monthlyInt;
@@ -216,21 +218,22 @@ public class AccountDatabase {
         for (int i = 0; i < numAcct; i++){
             fee = fmt.format(accounts[i].fee());
             monthlyInt = fmt.format((accounts[i].monthlyInterest()));
-            System.out.println(accounts[i].toString() + "::" + "fee $" + fee + "::" + "monthly interest $" + monthlyInt);
+            accDisplay.append(accounts[i].toString() + "::" + "fee $" + fee + "::" + "monthly interest $" + monthlyInt + '\n');
         }
-        System.out.println("*end of list*" + '\n');
+        accDisplay.append("*end of list*" + '\n');
+        return accDisplay;
     }
 
     /**
      * Update the balance of all the accounts in the database (that aren't closed).
      */
-    public void printUpdatedBalances() {
+    public StringBuilder printUpdatedBalances() {
+        StringBuilder accDisplay = new StringBuilder();
         if (numAcct == 0) {
-            System.out.println("Account Database is empty!");
-            return;
+            accDisplay.append("Account Database is empty!");
+            return accDisplay;
         }
-        System.out.println('\n' + "*list of accounts with updated balance*");
-
+        accDisplay.append("*list of accounts with updated balance*" + '\n');
         for (int i = 0; i < numAcct; i++) {
             if (accounts[i].closed) continue;
             accounts[i].deposit(accounts[i].monthlyInterest());
@@ -240,8 +243,9 @@ public class AccountDatabase {
             }
         }
         for (int i = 0; i < numAcct; i++){
-            System.out.println(accounts[i].toString());
+            accDisplay.append(accounts[i].toString() + '\n');
         }
-        System.out.println("*end of list*" + '\n');
+        accDisplay.append("*end of list*" + '\n');
+        return accDisplay;
     }
 }
