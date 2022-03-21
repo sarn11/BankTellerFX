@@ -17,13 +17,7 @@ public class BankTellerMain extends Application {
         primaryStage.show();
     }
 
-//    public static void openScene(Stage primaryStage) throws IOException {
-//        VBox vbox = new VBox(30);
-//        Scene openScene = new Scene(vbox, 500, 750);
-//        primaryStage.setTitle("Opening an account");
-//        primaryStage.setScene(openScene);
-//        primaryStage.show();
-//    }
+
 
     public static void main(String[] args) {
         launch();

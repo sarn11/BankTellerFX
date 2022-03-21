@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="676.0" prefWidth="891.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.banktellerfx.BankTellerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="676.0" prefWidth="891.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.banktellerfx.BankTellerController">
    <children>
-      <AnchorPane layoutX="14.0" layoutY="91.0" prefHeight="136.0" prefWidth="291.0">
+      <AnchorPane fx:id="commandPane" layoutX="14.0" layoutY="90.0" prefHeight="136.0" prefWidth="291.0">
          <children>
-            <RadioButton fx:id="cButton" layoutX="14.0" layoutY="46.0" mnemonicParsing="false" text="Close Account">
+            <RadioButton fx:id="cButton" layoutX="14.0" layoutY="46.0" mnemonicParsing="false" onAction="#getCommand" text="Close Account">
                <toggleGroup>
                   <ToggleGroup fx:id="Command" />
                </toggleGroup></RadioButton>
-            <RadioButton fx:id="dButton" layoutX="14.0" layoutY="76.0" mnemonicParsing="false" text="Deposit" toggleGroup="$Command" />
-            <RadioButton fx:id="ubButton" layoutX="125.0" layoutY="101.0" mnemonicParsing="false" text="Update balances" toggleGroup="$Command" />
-            <RadioButton fx:id="piButton" layoutX="125.0" layoutY="76.0" mnemonicParsing="false" text="Display with fees/interest" toggleGroup="$Command" />
-            <RadioButton fx:id="ptButton" layoutX="124.0" layoutY="46.0" mnemonicParsing="false" text="Display by type" toggleGroup="$Command" />
-            <RadioButton fx:id="pButton" layoutX="124.0" layoutY="14.0" mnemonicParsing="false" text="Display accounts" toggleGroup="$Command" />
+            <RadioButton fx:id="dButton" layoutX="14.0" layoutY="76.0" mnemonicParsing="false" onAction="#getCommand" text="Deposit" toggleGroup="$Command" />
             <RadioButton fx:id="oButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#getCommand" prefWidth="110.0" text="Open Account" toggleGroup="$Command" />
-            <RadioButton fx:id="wButton" layoutX="14.0" layoutY="101.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="97.0" text="Withdraw" toggleGroup="$Command" />
+            <RadioButton fx:id="wButton" layoutX="14.0" layoutY="101.0" mnemonicParsing="false" onAction="#getCommand" prefHeight="17.0" prefWidth="97.0" text="Withdraw" toggleGroup="$Command" />
+            <Button fx:id="pButton" layoutX="154.0" layoutY="10.0" mnemonicParsing="false" text="Display accounts" />
+            <Button fx:id="ptButton" layoutX="154.0" layoutY="42.0" mnemonicParsing="false" text="Display by type" />
+            <Button fx:id="piButton" layoutX="154.0" layoutY="72.0" mnemonicParsing="false" text="Display with fees/interest" />
+            <Button fx:id="ubButton" layoutX="154.0" layoutY="106.0" mnemonicParsing="false" text="Update balances and print" />
          </children>
       </AnchorPane>
       <TextArea fx:id="myTextArea" editable="false" layoutX="14.0" layoutY="14.0" prefHeight="61.0" prefWidth="842.0" text="Welcome! What would you like to do?">
@@ -26,24 +33,33 @@
             <Font size="20.0" />
          </font>
       </TextArea>
-      <VBox layoutX="14.0" layoutY="263.0" prefHeight="80.0" prefWidth="161.0">
+      <VBox fx:id="userBox" disable="true" layoutX="39.0" layoutY="236.0" prefHeight="80.0" prefWidth="161.0">
          <children>
-            <TextField promptText="first name" />
-            <TextField promptText="last name" />
-            <DatePicker promptText="enter dob" />
+            <TextArea fx:id="userArea" editable="false" prefHeight="56.0" prefWidth="161.0" text="Enter user info here" />
+            <TextField fx:id="fName" promptText="first name" />
+            <TextField fx:id="lName" promptText="last name" />
+            <DatePicker fx:id="myDatePicker" promptText="enter dob" />
+            <Button fx:id="userButton" mnemonicParsing="false" onAction="#userInfo" prefHeight="25.0" prefWidth="162.0" text="Submit" />
          </children>
       </VBox>
-      <TextArea layoutX="14.0" layoutY="219.0" prefHeight="29.0" prefWidth="161.0" text="Enter user info here" />
-      <DialogPane layoutX="323.0" layoutY="227.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="480.0">
-          <header>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0" />
-          </header>
-          <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0" />
-          </content>
-          <expandableContent>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0" />
-          </expandableContent>
-      </DialogPane>
+      <Pane fx:id="accountBox" disable="true" layoutX="14.0" layoutY="382.0" prefHeight="175.0" prefWidth="264.0">
+         <children>
+            <TextArea fx:id="accountArea" editable="false" layoutX="1.0" prefHeight="38.0" prefWidth="255.0" text="Enter account info here" />
+            <TextField fx:id="moneyField" layoutX="16.0" layoutY="100.0" prefHeight="25.0" prefWidth="169.0" promptText="deposit/withdrawal amount" />
+            <RadioButton fx:id="checkButton" layoutX="16.0" layoutY="45.0" mnemonicParsing="false" onAction="#getAccType" text="Checking">
+               <toggleGroup>
+                  <ToggleGroup fx:id="AccountType" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="mmButton" layoutX="92.0" layoutY="72.0" mnemonicParsing="false" onAction="#getAccType" text="Money Market" toggleGroup="$AccountType" />
+            <RadioButton fx:id="ccButton" layoutX="92.0" layoutY="45.0" mnemonicParsing="false" onAction="#getAccType" text="College Checking" toggleGroup="$AccountType" />
+            <RadioButton fx:id="sButton" layoutX="14.0" layoutY="72.0" mnemonicParsing="false" onAction="#getAccType" text="Savings" toggleGroup="$AccountType" />
+            <TextField fx:id="loyalty_campus" layoutX="16.0" layoutY="123.0" prefHeight="25.0" prefWidth="169.0" promptText="enter loyalty or campus code">
+               <font>
+                  <Font size="11.0" />
+               </font></TextField>
+            <Button fx:id="accountButton" layoutX="8.0" layoutY="149.0" mnemonicParsing="false" onAction="#accountInfo" prefHeight="25.0" prefWidth="198.0" text="Submit" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
