@@ -2,6 +2,7 @@ package com.example.banktellerfx;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -17,15 +18,18 @@ public class BankTellerController {
     @FXML
     private TextArea myTextArea, userArea, accountArea, displayScreen;
     @FXML
-    private RadioButton oButton, cButton, dButton, wButton, ccButton, mmButton, checkButton, sButton;
+    private RadioButton oButton, cButton, dButton, wButton, ccButton, mmButton, checkButton,
+            sButton, nbButton, newarkButton, camButton, loyalButton;
     @FXML
     private VBox userBox, accountBox2;
     @FXML
     private Pane accountBox;
     @FXML
-    private TextField loyalty_campus, fName, lName, moneyField, dobField;
+    private TextField fName, lName, moneyField, dobField;
     @FXML
     private HBox commandPane;
+    @FXML
+    private AnchorPane optionPane;
 
 
     public void getCommand() {
@@ -44,7 +48,10 @@ public class BankTellerController {
         else if (wButton.isSelected()) {
             myTextArea.setText("Enter info below to make a withdrawal.");
         }
-        if (!oButton.isSelected()) loyalty_campus.setDisable(true);
+        if (!oButton.isSelected()) {
+            optionPane.setDisable(true);
+            //loyalty_campus.setDisable(true);
+        }
         if (!cButton.isSelected()) moneyField.setDisable(false);
     }
 
@@ -78,13 +85,29 @@ public class BankTellerController {
 
     public void getAccType() {
         if (ccButton.isSelected()) {
-            if (oButton.isSelected()) loyalty_campus.setDisable(false);
+            if (oButton.isSelected()) {
+                optionPane.setDisable(false);
+                loyalButton.setDisable(true);
+                //loyalty_campus.setDisable(false);
+            }
         }
-        else if (checkButton.isSelected()) loyalty_campus.setDisable(true);
+//        else if (checkButton.isSelected()) {
+//            //optionPane.setDisable(true);
+//            //loyalty_campus.setDisable(true);
+//        }
         else if (sButton.isSelected()) {
-            if (oButton.isSelected()) loyalty_campus.setDisable(false);
+            if (oButton.isSelected()) {
+                optionPane.setDisable(false);
+                nbButton.setDisable(true);
+                newarkButton.setDisable(true);
+                camButton.setDisable(true);
+                loyalButton.setDisable(false);
+                //loyalty_campus.setDisable(false);
+            }
         }
-        else if (mmButton.isSelected()) loyalty_campus.setDisable(true);
+//        else if (mmButton.isSelected()) {
+//            loyalty_campus.setDisable(true);
+//        }
         accountBox.setDisable(true);
         accountBox2.setDisable(false);
     }
@@ -99,17 +122,23 @@ public class BankTellerController {
             accountArea.setText("Enter a valid amount!");
             return;
         }
-        if ((sButton.isSelected() || ccButton.isSelected()) && loyalty_campus.getText().isEmpty() && oButton.isSelected()) {
-            accountArea.setText("Enter a loyalty/campus code!");
-            return;
-        }
+
         double money;
         int code = 0;
+        if (sButton.isSelected() && oButton.isSelected() && loyalButton.isSelected()) {
+            code = 1;
+        }
+        if ((ccButton.isSelected())  && oButton.isSelected()) {
+            if (!nbButton.isSelected() && !camButton.isSelected() && !newarkButton.isSelected()){
+                accountArea.setText("Enter a campus!");
+                return;
+            }
+            else if (nbButton.isSelected()) code = 0;
+            else if (newarkButton.isSelected()) code = 1;
+            else if (camButton.isSelected()) code = 2;
+        }
         try {
             money = Double.parseDouble(moneyField.getText());
-            if ((sButton.isSelected() || ccButton.isSelected()) && oButton.isSelected()) {
-                code = Integer.parseInt(loyalty_campus.getText());
-            }
         }
         catch (NumberFormatException e) {
             accountArea.setText("Enter only numbers!");
@@ -125,14 +154,14 @@ public class BankTellerController {
             accountArea.setText("Enter an amount greater than 0!");
             return;
         }
-        if (ccButton.isSelected() && (code > 2 || code < 0)) {
-            accountArea.setText("Invalid campus code!");
-            return;
-        }
-        if (sButton.isSelected() && (code < 0 || code > 1)) {
-            accountArea.setText("Invalid loyalty code!");
-            return;
-        }
+//        if (ccButton.isSelected() && (code > 2 || code < 0)) {
+//            accountArea.setText("Invalid campus code!");
+//            return;
+//        }
+//        if (sButton.isSelected() && (code < 0 || code > 1)) {
+//            accountArea.setText("Invalid loyalty code!");
+//            return;
+//        }
         createAcc(money, code);
         resetData();
     }
@@ -204,13 +233,18 @@ public class BankTellerController {
         commandPane.setDisable(false);
         accountBox.setDisable(true);
         accountBox2.setDisable(true);
+        optionPane.setDisable(true);
         userArea.setText("Enter user info here:");
         fName.clear();
         lName.clear();
         dobField.clear();
         accountArea.setText("Enter account info here:");
         moneyField.clear();
-        loyalty_campus.clear();
+        //loyalty_campus.clear();
+        nbButton.setSelected(false);
+        camButton.setSelected(false);
+        newarkButton.setSelected(false);
+        loyalButton.setSelected(false);
         oButton.setSelected(false);
         cButton.setSelected(false);
         dButton.setSelected(false);
@@ -219,6 +253,10 @@ public class BankTellerController {
         ccButton.setSelected(false);
         sButton.setSelected(false);
         mmButton.setSelected(false);
+        nbButton.setDisable(false);
+        newarkButton.setDisable(false);
+        camButton.setDisable(false);
+        loyalButton.setDisable(false);
         //myTextArea.setText("What would you like to do?");
     }
 
