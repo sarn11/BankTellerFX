@@ -59,7 +59,6 @@ public class BankTellerController {
         String fname;
         String lname;
         Date dob;
-
         if (fName.getText().trim().isEmpty() || lName.getText().trim().isEmpty() || dobField.getText().trim().isEmpty()) {
             userArea.setText("Data missing!");
             return;

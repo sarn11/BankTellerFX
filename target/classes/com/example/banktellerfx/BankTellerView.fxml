@@ -11,22 +11,31 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="676.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.banktellerfx.BankTellerController">
+<AnchorPane fx:id="c" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="676.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.banktellerfx.BankTellerController">
    <children>
       <TextArea fx:id="myTextArea" editable="false" layoutX="14.0" layoutY="14.0" prefHeight="61.0" prefWidth="1012.0" text="Welcome! What would you like to do?">
          <font>
             <Font size="20.0" />
          </font>
       </TextArea>
-      <VBox fx:id="accountBox2" disable="true" layoutX="23.0" layoutY="440.0" prefHeight="120.0" prefWidth="237.0">
+      <VBox fx:id="accountBox2" disable="true" layoutX="24.0" layoutY="436.0" prefHeight="163.0" prefWidth="237.0">
          <children>
             <TextArea fx:id="accountArea" editable="false" prefHeight="38.0" prefWidth="255.0" text="Enter account info here:" />
             <TextField fx:id="moneyField" prefHeight="25.0" prefWidth="169.0" promptText="deposit/withdrawal amount" />
-            <TextField fx:id="loyalty_campus" disable="true" prefHeight="25.0" prefWidth="169.0" promptText="enter loyalty or campus code">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </TextField>
+            <AnchorPane fx:id="optionPane" disable="true" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <RadioButton fx:id="nbButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="New Brunswick">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="Campus" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton fx:id="camButton" layoutX="119.0" layoutY="14.0" mnemonicParsing="false" text="Camden" toggleGroup="$Campus" />
+                  <RadioButton fx:id="newarkButton" layoutX="14.0" layoutY="51.0" mnemonicParsing="false" text="Newark" toggleGroup="$Campus" />
+                  <RadioButton fx:id="loyalButton" layoutX="119.0" layoutY="51.0" mnemonicParsing="false" text="Loyal">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="Loyalty" />
+                     </toggleGroup></RadioButton>
+               </children>
+            </AnchorPane>
             <Button mnemonicParsing="false" onAction="#accountInfo" prefHeight="25.0" prefWidth="240.0" text="Submit" />
          </children>
       </VBox>
@@ -72,6 +81,6 @@
             </AnchorPane>
          </children>
       </HBox>
-      <Button layoutX="55.0" layoutY="590.0" mnemonicParsing="false" onAction="#resetData" prefHeight="25.0" prefWidth="174.0" text="Reset Input!" />
+      <Button layoutX="56.0" layoutY="611.0" mnemonicParsing="false" onAction="#resetData" prefHeight="25.0" prefWidth="174.0" text="Reset Input!" />
    </children>
 </AnchorPane>
