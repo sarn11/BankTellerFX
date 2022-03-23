@@ -93,7 +93,7 @@ public class Date implements Comparable<Date> {
     @return true if the date is valid and false otherwise
      */
     public boolean isValid() {
-        if (year < 0) return false;
+        if (year < 1900) return false;
         if ((month < 1) || (month > 12)) return false;
         if ((day < 1) || (day > 31)) return false;
         return switch (month) {
