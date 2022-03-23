@@ -71,7 +71,7 @@ public class AccountDatabase {
         if (accIndex >= 0 && accounts[accIndex].closed) {
             accounts[accIndex].closed = false;
             accounts[accIndex].balance = accounts[accIndex].balance + account.balance;
-            if (accounts[accIndex].getType().equals("Money Market Savings") && accounts[accIndex].balance > 2500){
+            if (accounts[accIndex].getType().equals("Money Market Savings") && accounts[accIndex].balance >= 2500){
                 ((MoneyMarket)accounts[accIndex]).setLoyal(1);
             }
             if (accounts[accIndex].getType().equals("College Checking")) {

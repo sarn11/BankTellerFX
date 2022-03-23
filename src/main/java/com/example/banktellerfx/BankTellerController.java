@@ -235,11 +235,11 @@ public class BankTellerController {
         accountBox.setDisable(true);
         accountBox2.setDisable(true);
         optionPane.setDisable(true);
-        userArea.setText("Enter user info here:");
+        userArea.setText("Enter user info below:");
         fName.clear();
         lName.clear();
         dobField.clear();
-        accountArea.setText("Enter account info here:");
+        accountArea.setText("Enter account info below:");
         moneyField.clear();
         //loyalty_campus.clear();
         nbButton.setSelected(false);
