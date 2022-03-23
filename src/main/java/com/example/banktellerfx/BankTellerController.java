@@ -30,6 +30,8 @@ public class BankTellerController {
     private HBox commandPane;
     @FXML
     private AnchorPane optionPane;
+    @FXML
+    private Button ubButton;
 
 
     public void getCommand() {
@@ -256,6 +258,7 @@ public class BankTellerController {
         newarkButton.setDisable(false);
         camButton.setDisable(false);
         loyalButton.setDisable(false);
+        ubButton.setDisable(false);
         //myTextArea.setText("What would you like to do?");
     }
 
@@ -313,6 +316,7 @@ public class BankTellerController {
     public void updateBalances() {
         StringBuilder accDisplay = db.printUpdatedBalances();
         displayScreen.setText(String.valueOf(accDisplay));
+        ubButton.setDisable(true);
     }
 
     public void displayFees() {

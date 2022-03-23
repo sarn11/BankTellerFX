@@ -76,7 +76,7 @@
                   <Button layoutX="131.0" layoutY="10.0" mnemonicParsing="false" onAction="#displayAccounts" text="Display accounts" />
                   <Button layoutX="131.0" layoutY="42.0" mnemonicParsing="false" onAction="#displayByType" text="Display by type" />
                   <Button layoutX="131.0" layoutY="72.0" mnemonicParsing="false" onAction="#displayFees" text="Display with fees/interest" />
-                  <Button layoutX="131.0" layoutY="106.0" mnemonicParsing="false" onAction="#updateBalances" text="Update balances and print" />
+                  <Button fx:id="ubButton" layoutX="131.0" layoutY="106.0" mnemonicParsing="false" onAction="#updateBalances" text="Update balances and print" />
                </children>
             </AnchorPane>
          </children>
