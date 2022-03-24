@@ -21,21 +21,45 @@ public class BankTellerController {
     protected Date today = new Date();
     Profile prof;
 
+    /**
+     * TextArea constructors to display messages.
+     */
     @FXML
     private TextArea myTextArea, userArea, accountArea, displayScreen;
+    /**
+     * RadioButtons that perform various actions such as commands and account types.
+     */
     @FXML
     private RadioButton oButton, cButton, dButton, wButton, ccButton, mmButton, checkButton,
             sButton, nbButton, newarkButton, camButton, loyalButton;
+    /**
+     * VBox that holds various nodes.
+     */
     @FXML
     private VBox userBox, accountBox2;
+    /**
+     * Pane that holds various nodes.
+     */
     @FXML
     private Pane accountBox;
+    /**
+     * TextFields that take in various data from the user.
+     */
     @FXML
     private TextField fName, lName, moneyField, dobField;
+    /**
+     * HBox that holds various nodes.
+     */
     @FXML
     private HBox commandPane;
+    /**
+     * AnchorPane that holds various nodes.
+     */
     @FXML
     private AnchorPane optionPane;
+    /**
+     * Button that updates balances of all accounts.
+     */
     @FXML
     private Button ubButton;
 
