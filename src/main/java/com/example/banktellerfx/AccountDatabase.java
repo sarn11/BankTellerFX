@@ -246,6 +246,7 @@ public class AccountDatabase {
             accDisplay.append(accounts[i].toString() + '\n');
         }
         accDisplay.append("*end of list*" + '\n');
+        accDisplay.append("You can only do this once per action!");
         return accDisplay;
     }
 }
