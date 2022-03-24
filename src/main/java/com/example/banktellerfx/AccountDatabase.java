@@ -132,11 +132,9 @@ public class AccountDatabase {
     public boolean withdraw(Account account) {
         int index = find(account);
         if (index == -1) {
-            //System.out.println(account.holder.toString() + " " + account.getType() + " is not in the database.");
             return false;
         }
         if (index >= 0 && accounts[index].closed) {
-           // System.out.println(account.holder.toString() + " " + account.getType() + " has been closed, withdrawal failed.");
             return false;
         }
 

@@ -22,7 +22,7 @@ public class BankTellerMain extends Application {
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(BankTellerMain.class.getResource("BankTellerView.fxml"));
         Scene scene1 = new Scene(fxmlLoader.load());
-        primaryStage.setTitle("Sarn Banking");
+        primaryStage.setTitle("SarnPathak Banking");
         primaryStage.setScene(scene1);
         primaryStage.show();
     }
